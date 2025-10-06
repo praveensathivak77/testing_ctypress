@@ -1,0 +1,26 @@
+[
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "johndoe@example.com",
+    "phone": "9876543210",
+    "product": "Edge",
+    "message": "This is a test message from John."
+  },
+  {
+    "firstName": "Alice",
+    "lastName": "Smith",
+    "email": "alice.smith@example.com",
+    "phone": "9998887777",
+    "product": "Cube",
+    "message": "Inquiry about Cube platform automation testing."
+  },
+  {
+    "firstName": "Rahul",
+    "lastName": "Verma",
+    "email": "rahul.verma@example.com",
+    "phone": "9123456789",
+    "product": "Hedwig",
+    "message": "Interested in Hedwig platform demo."
+  }
+]
