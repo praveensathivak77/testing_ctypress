@@ -75,3 +75,29 @@ Then("I view the Privacy Policy and return", () => {
   homePage.verifyHomepage();
 });
 
+When("I click on the Reach Out button", () => {
+  homePage.clickReachOut();
+});
+
+Then("I should see the Reach Out page", () => {
+  homePage.verifyReachOutPage();
+});
+
+Then("I return to the homepage", () => {
+  homePage.clickLogo();
+});
+
+When("I click on the Learn more button", () => {
+  homePage.clickLearnmore();
+});
+
+Then("I should see the We are a trusted partner page", () => {
+  homePage.verifyLearnmore();
+});
+
+Then("I return to the homepage of cubera", () => {
+  homePage.clickLogo();
+});
+
+
+

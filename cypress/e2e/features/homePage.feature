@@ -22,3 +22,16 @@ Feature: Cubera Homepage Navigation and Contact Form
     And I try all invalid form submissions
     Then I should be back on the homepage
     And I view the Privacy Policy and return
+
+  Scenario: Open Reach Out page and return to homepage
+    Given I open the Cubera homepage
+    When I click on the Reach Out button
+    Then I should see the Reach Out page
+    And I return to the homepage
+
+   Scenario: Open Learn more and return to homepage
+    Given I open the Cubera homepage
+    When I click on the Learn more button
+    Then I should see the We are a trusted partner page 
+    And I return to the homepage of cubera
+  

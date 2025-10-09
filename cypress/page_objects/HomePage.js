@@ -1,4 +1,5 @@
 class HomePage {
+  // ---------- Core Navigation ----------
   visit() {
     cy.visit("https://cubera.co/");
   }
@@ -20,21 +21,17 @@ class HomePage {
 
   verifyHomepage() {
     cy.url().should("include", "cubera.co");
-
-    // Logo visible
     cy.get("header a img:visible").should("be.visible");
-
-    // Menu item that always exists
     cy.contains("Our Solutions", { timeout: 10000 }).should("be.visible");
-
-    // Hero text (text-based check instead of fragile CSS)
     cy.contains(/Transform|Platform|Marketing/i, { timeout: 15000 }).should("be.visible");
   }
 
+  // ---------- Contact Page ----------
   navigateToContact() {
     cy.contains("div.ast-custom-button", "Contact Us", { timeout: 10000 })
       .scrollIntoView()
       .click({ force: true });
+
     cy.get("#wpforms-1653", { timeout: 20000 }).should("be.visible");
   }
 
@@ -64,6 +61,23 @@ class HomePage {
       .click({ force: true });
   }
 
+  verifyValidationErrors() {
+    cy.get(".wpforms-error", { timeout: 10000 }).should("be.visible");
+  }
+
+  // ---------- Cookies & Calendly ----------
+  closeCookies() {
+    cy.get("body").then($body => {
+      if ($body.find("button.onetrust-close-btn-handler").length) {
+        cy.get("button.onetrust-close-btn-handler").first().click({ force: true });
+      } else if ($body.find("button:contains('Accept')").length) {
+        cy.contains("button", "Accept").first().click({ force: true });
+      } else {
+        cy.log("No cookie popup found, continuing...");
+      }
+    });
+  }
+
   verifyCalendlyModal() {
     cy.get("div.calendly-overlay", { timeout: 15000 }).should("be.visible");
   }
@@ -82,38 +96,49 @@ class HomePage {
     });
   }
 
-  closeCookies() {
-    cy.get("body").then($body => {
-      if ($body.find("button.onetrust-close-btn-handler").length) {
-        cy.get("button.onetrust-close-btn-handler").first().click({ force: true });
-      } else if ($body.find("button:contains('Accept')").length) {
-        cy.contains("button", "Accept").first().click({ force: true });
-      } else {
-        cy.log("No cookie popup found, continuing...");
-      }
-    });
-  }
-
-  verifyValidationErrors() {
-    cy.get(".wpforms-error", { timeout: 10000 }).should("be.visible");
-  }
-
- viewPrivacyPolicy() {
-    cy.get(".wpforms-field-label-inline > a", { timeout: 10000 })
-      .scrollIntoView()
-      .should("be.visible")
-      .invoke("removeAttr", "target")     // ensure same tab
-      .click({ force: true });            // Cypress-controlled click
-
-    // Wait until the new page loads
-    cy.location("pathname", { timeout: 10000 }).should("include", "privacy");
-
-    // Scroll simulate reading
+  // ---------- Helpers ----------
+  simulateScroll() {
     cy.wait(1000);
     cy.scrollTo("bottom", { duration: 2000 });
     cy.wait(1000);
     cy.scrollTo("top", { duration: 2000 });
   }
+
+  // ---------- Privacy Policy ----------
+  viewPrivacyPolicy() {
+    cy.get(".wpforms-field-label-inline > a", { timeout: 10000 })
+      .scrollIntoView()
+      .should("be.visible")
+      .invoke("removeAttr", "target") // same tab
+      .click({ force: true });
+
+    cy.location("pathname", { timeout: 10000 }).should("include", "privacy");
+
+    this.simulateScroll();   // ✅ reuses helper
+    this.clickLogo();        // ✅ return home
+    this.verifyHomepage();   // ✅ confirm home
+  }
+
+  // ---------- Reach Out ----------
+ clickReachOut() {
+  cy.contains("a.elementor-button.elementor-button-link.elementor-size-sm", "Reach Out", { timeout: 10000 })
+    .scrollIntoView()
+    .should("be.visible")
+    .click({ force: true });
+}
+  verifyReachOutPage() {
+    cy.contains(".elementor-heading-title", /get in touch with us/i, { timeout: 15000 })
+      .should("be.visible");
+  }
+  clickLearnmore(){
+cy.get('.elementor-element-ad3ce26 > .elementor-widget-container > .elementor-button-wrapper > .elementor-button > .elementor-button-content-wrapper > .elementor-button-text')      .scrollIntoView()
+      .should("be.visible")
+      .click({ force: true});
+  }
+  verifyLearnmore() {
+    cy.contains(".elementor-heading-title", /We are a trusted partner/i, { timeout: 15000 })
+      .should("be.visible");
+  }
 }
 
-export default HomePage;
+export default HomePage;   // 👈 export class
