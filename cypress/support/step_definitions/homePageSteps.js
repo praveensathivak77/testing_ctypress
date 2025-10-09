@@ -6,8 +6,6 @@ const homePage = new HomePage();
 
 Given("I open the Cubera homepage", () => {
   cy.viewport(1366, 768);
-  cy.clearCookies();
-  cy.clearLocalStorage();
   homePage.visit();
 });
 
@@ -70,3 +68,10 @@ Then("I return to the homepage by clicking the logo", () => {
 Then("I should be back on the homepage", () => {
   homePage.verifyHomepage();
 });
+
+Then("I view the Privacy Policy and return", () => {
+  homePage.viewPrivacyPolicy();
+  homePage.clickLogo();
+  homePage.verifyHomepage();
+});
+

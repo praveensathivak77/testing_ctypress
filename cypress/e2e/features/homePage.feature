@@ -21,3 +21,4 @@ Feature: Cubera Homepage Navigation and Contact Form
     When I go to the contact page
     And I try all invalid form submissions
     Then I should be back on the homepage
+    And I view the Privacy Policy and return

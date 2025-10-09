@@ -97,6 +97,23 @@ class HomePage {
   verifyValidationErrors() {
     cy.get(".wpforms-error", { timeout: 10000 }).should("be.visible");
   }
+
+ viewPrivacyPolicy() {
+    cy.get(".wpforms-field-label-inline > a", { timeout: 10000 })
+      .scrollIntoView()
+      .should("be.visible")
+      .invoke("removeAttr", "target")     // ensure same tab
+      .click({ force: true });            // Cypress-controlled click
+
+    // Wait until the new page loads
+    cy.location("pathname", { timeout: 10000 }).should("include", "privacy");
+
+    // Scroll simulate reading
+    cy.wait(1000);
+    cy.scrollTo("bottom", { duration: 2000 });
+    cy.wait(1000);
+    cy.scrollTo("top", { duration: 2000 });
+  }
 }
 
 export default HomePage;
