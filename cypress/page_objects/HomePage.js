@@ -363,7 +363,59 @@ scrollToRecentBlogs() {
     cy.contains("Find out more in our recent blogs", { timeout: 10000 }).should("be.visible");
     cy.wait(2000);
   }
+  scrollToTrustedPartners() {
+    // scroll to the section heading to ensure it's visible
+    cy.contains("Our Trusted Partners", { timeout: 10000 })
+      .scrollIntoView({ duration: 4000, offset: { top: -100, left: 0 } }) // smooth + adjust
+      .should("be.visible");
+
+    cy.wait(2000); // wait so we can observe
+  }
+  scrollToFAQs() {
+    cy.contains("Cubera FAQs for more information", { timeout: 10000 })
+      .scrollIntoView({ duration: 4000 })
+      .should("be.visible");
+
+    cy.wait(2000);
+  }
+
+  clickFAQs() {
+    // Click 1st FAQ
+    cy.get('#e-n-accordion-item-1760 > .e-n-accordion-item-title > .e-n-accordion-item-title-icon > .e-closed')
+      .click({ force: true });
+    cy.wait(1500);
+
+    // Click 2nd FAQ
+    cy.get('#e-n-accordion-item-1761 > .e-n-accordion-item-title > .e-n-accordion-item-title-icon > .e-closed')
+      .click({ force: true });
+    cy.wait(1500);
+
+    // Click 3rd FAQ
+    cy.get('#e-n-accordion-item-1762 > .e-n-accordion-item-title > .e-n-accordion-item-title-icon > .e-opened')
+      .click({ force: true });
+    cy.wait(1500);
+
+    // Click 4th FAQ
+    cy.get('#e-n-accordion-item-1763 > .e-n-accordion-item-title > .e-n-accordion-item-title-icon > .e-closed')
+      .click({ force: true });
+    cy.wait(1500);
+
+    // Click 5th FAQ
+    cy.get('#e-n-accordion-item-1764 > .e-n-accordion-item-title > .e-n-accordion-item-title-icon > .e-closed')
+      .click({ force: true });
+    cy.wait(1500);
+  }
+
+  verifyFAQAnswers() {
+    cy.contains("Cubera’s AdTech ecosystem includes Edge").should("be.visible");
+    cy.contains("Cubera uses its proprietary Identity Graph").should("be.visible");
+    cy.contains("Deep Learning powers Cubera’s platforms").should("be.visible");
+    cy.contains("Cubera’s ecosystem optimizes").should("be.visible");
+    cy.contains("Vertex is Cubera’s AdExchange").should("be.visible");
+  }
+  scrollToPageEnd() {
+    cy.scrollTo("bottom", { duration: 5000 }); // smooth scroll to end
+    cy.wait(2000); // pause to observe
 }
-
-
+}
 export default HomePage;

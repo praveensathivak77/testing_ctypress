@@ -93,6 +93,22 @@ Feature: Cubera Homepage Navigation and Contact Form
       Then I should see the "Omni Channel Advertising" blog page
       And I return to the homepage and blog
 
+  Scenario: Scroll and click through Our Trusted Partners carousel
+      Given I open the Cubera homepage
+      When I scroll to the Our Trusted Partners section
+      Then I should see the "Our Trusted Partners" heading3
+      @only
+  Scenario: Scroll to FAQs, validate answers, and scroll to end
+      Given I open the Cubera homepage
+      When I scroll to the FAQs section
+      And I click each FAQ one by one
+      Then I should see correct answers displayed
+      And I scroll to the bottom of the page
+
+
+
+
+
 
 
 

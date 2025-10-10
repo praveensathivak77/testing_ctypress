@@ -209,3 +209,27 @@ Then("I click the title link of the second blog", () => {
 Then("I click the title link of the third blog", () => {
   homePage.clickThirdBlogTitle();
 });
+
+When("I scroll to the Our Trusted Partners section", () => {
+  homePage.scrollToTrustedPartners();
+});
+
+Then("I should see the {string} heading3", (headingText) => {
+  cy.contains("h2, h3", headingText, { timeout: 10000 }).should("be.visible");
+});
+
+When("I scroll to the FAQs section", () => {
+  homePage.scrollToFAQs();
+});
+
+When("I click each FAQ one by one", () => {
+  homePage.clickFAQs();
+});
+
+Then("I should see correct answers displayed", () => {
+  homePage.verifyFAQAnswers();
+});
+
+Then("I scroll to the bottom of the page", () => {
+  homePage.scrollToPageEnd();
+});
