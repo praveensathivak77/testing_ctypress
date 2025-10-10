@@ -97,7 +97,8 @@ Feature: Cubera Homepage Navigation and Contact Form
       Given I open the Cubera homepage
       When I scroll to the Our Trusted Partners section
       Then I should see the "Our Trusted Partners" heading3
-      @only
+    
+
   Scenario: Scroll to FAQs, validate answers, and scroll to end
       Given I open the Cubera homepage
       When I scroll to the FAQs section

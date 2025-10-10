@@ -11,7 +11,7 @@ Given("I open the Cubera homepage", () => {
 
 When("I choose {string}", (navigationType) => {
   if (navigationType === "navigate main menus") {
-    const menus = ["Our Solutions", "Our Platforms", "Insights", "Academy"];
+    const menus = ["Our Solutions", "Our Platforms", "Insights", "Academy","About"];
     menus.forEach(menu => {
       homePage.hoverMenu(menu);
       homePage.clickMenu(menu);
