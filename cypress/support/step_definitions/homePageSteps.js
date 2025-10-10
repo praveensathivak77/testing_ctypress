@@ -198,7 +198,7 @@ Then("I should see the {string} blog page", (blogHeading) => {
   cy.contains("h1, h2", blogHeading, { timeout: 10000 }).should("be.visible");
 });
 
-Then("I return to the homepage and blog1", () => {
+Then("I return to the homepage and blog", () => {
   homePage.returnToHomepage();
 });
 

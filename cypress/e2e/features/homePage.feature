@@ -50,7 +50,7 @@ Feature: Cubera Homepage Navigation and Contact Form
       And I hover over the AI Powered Reach cards from left to right
       And I hover back over the AI Powered Reach cards from right to left
       Then the AI Powered Reach section should remain visible
-   @only
+   
    Scenario: Navigate to services and return to Core Service Offerings
       Given I open the Cubera homepage
       When I scroll to the Core Service Offerings section
