@@ -127,7 +127,59 @@ Then("the AI Powered Reach section should remain visible", () => {
   cy.get(".elementor-element-54dcb6a", { timeout: 10000 }).should("be.visible");
 });
 
+When("I scroll to the Core Service Offerings section", () => {
+  homePage.scrollToCoreServices();
+});
 
+When("I click the Omnichannel Targeting", () => {
+  homePage.clickOmnichannelTargeting();
+});
 
+Then("I should see the Omnichannel Targeting page", () => {
+  homePage.verifyOmnichannelTargetingPage();
+});
+
+Then("I return to the Core Service Offerings section", () => {
+  homePage.returnToCoreServices();
+});
+
+When("I click the Identity Graph", () => {
+  homePage.clickIdentityGraph();
+});
+
+Then("I should see the Identity Graph page", () => {
+  homePage.verifyIdentityGraphPage();
+});
+
+When("I click the AI Cohort Generation", () => {
+  homePage.clickAICohortGeneration();
+});
+
+Then("I should see the AI Cohort Generation page", () => {
+  homePage.verifyAICohortGenerationPage();
+});
+
+When("I click the Ad Service", () => {
+  homePage.clickAdService();
+});
+Then("I should see the Ad Service page", () => {
+  homePage.verifyAdServicePage();
+});
+
+Then("I return to the Core Service Offerings sections", () => {
+  homePage.returnToCoreServices();
+});
+
+When("I scroll to the client testimonials section", () => {
+  homePage.scrollToClientTestimonials();
+});
+
+Then("I should see the {string} heading", (headingText) => {
+  homePage.verifyClientTestimonialsHeading(headingText);
+});
+
+Then("I click the carousel arrows twice each", () => {
+  homePage.clickCarouselArrows();
+});
 
 

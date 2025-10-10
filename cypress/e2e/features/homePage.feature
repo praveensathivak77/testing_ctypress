@@ -43,12 +43,42 @@ Feature: Cubera Homepage Navigation and Contact Form
       And I click the right arrow 3 times
       And I click the left arrow 3 times
 
-    @only
+    
     Scenario: Hover over AI Powered Reach cards in both directions
       Given I open the Cubera homepage
       When I scroll to the AI Powered Reach section
       And I hover over the AI Powered Reach cards from left to right
       And I hover back over the AI Powered Reach cards from right to left
       Then the AI Powered Reach section should remain visible
+   
+   Scenario: Navigate to services and return to Core Service Offerings
+      Given I open the Cubera homepage
+      When I scroll to the Core Service Offerings section
+      And I click the Omnichannel Targeting
+      Then I should see the Omnichannel Targeting page
+      And I return to the Core Service Offerings section
+      And I click the Identity Graph
+      Then I should see the Identity Graph page
+      And I return to the Core Service Offerings section
+      And I click the AI Cohort Generation
+      Then I should see the AI Cohort Generation page
+      And I return to the Core Service Offerings section
+      And I click the Ad Service
+      Then I should see the Ad Service page
+      And I return to the Core Service Offerings sections
+@only
+    Scenario: Scroll to client testimonials
+      Given I open the Cubera homepage
+      When I scroll to the client testimonials section
+      Then I should see the "What our clients say about us" heading
+      And I click the carousel arrows twice each
+
+
+
+
+      
+
+
+
       
   

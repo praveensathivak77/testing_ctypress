@@ -215,6 +215,107 @@ cy.get('.elementor-element-ad3ce26 > .elementor-widget-container > .elementor-bu
       cy.wait(1000);
     });
   }
+   // ✅ New: Scroll until Core Service Offerings section
+  scrollToCoreServices() {
+    cy.contains("h2", "Core Service Offerings", { timeout: 10000 })
+      .scrollIntoView()
+      .should("be.visible");
+  }
+
+  // -------- Omnichannel --------
+  clickOmnichannelTargeting() {
+    cy.contains(".elementor-heading-title", /omnichannel targeting/i, { timeout: 10000 })
+      .scrollIntoView()
+      .click({ force: true });
+  }
+
+  verifyOmnichannelTargetingPage() {
+    cy.contains("h1, h2, h3", /omnichannel targeting/i, { timeout: 15000 })
+      .should("be.visible");
+  }
+
+  // -------- Identity Graph --------
+  clickIdentityGraph() {
+    cy.contains(".elementor-heading-title", /identity graph/i, { timeout: 10000 })
+      .scrollIntoView()
+      .click({ force: true });
+  }
+
+  verifyIdentityGraphPage() {
+    cy.contains("h1, h2, h3", /identity graph/i, { timeout: 15000 })
+      .should("be.visible");
+  }
+
+  // -------- AI Cohort Generation --------
+  clickAICohortGeneration() {
+    cy.contains(".elementor-heading-title", /ai cohort generation/i, { timeout: 10000 })
+      .scrollIntoView()
+      .click({ force: true });
+  }
+
+  verifyAICohortGenerationPage() {
+    cy.contains("h1, h2, h3", /ai cohort generation/i, { timeout: 15000 })
+      .should("be.visible");
+  }
+
+  // -------- Ad Service --------
+  clickAdService() {
+    cy.contains(".elementor-heading-title", /ad service/i, { timeout: 10000 })
+      .scrollIntoView()
+      .click({ force: true });
+  }
+
+  verifyAdServicePage() {
+    cy.contains("h1, h2, h3", /ad service/i, { timeout: 15000 })
+      .should("be.visible");
+  }
+
+
+// ---------- Client Testimonials ----------
+  scrollToClientTestimonials() {
+    cy.get(
+      ".elementor-element-c6f2ba0 > .e-con-inner > .elementor-element > .elementor-widget-container > .elementor-heading-title",
+      { timeout: 10000 }
+    )
+      .scrollIntoView()
+      .should("be.visible");
+  }
+
+  verifyClientTestimonialsHeading(expectedText) {
+    cy.get(
+      ".elementor-element-c6f2ba0 > .e-con-inner > .elementor-element > .elementor-widget-container > .elementor-heading-title",
+      { timeout: 10000 }
+    )
+      .invoke("text")
+      .then((text) => {
+        expect(text.trim()).to.eq(expectedText);
+      });
+  }
+
+  // ---------- Carousel ----------
+  clickCarouselArrows() {
+    // Prev 2 times
+    cy.get(
+      ".e-con-inner > .elementor-element > .elementor-widget-container > .elementor-image-carousel-wrapper > .elementor-swiper-button-prev",
+      { timeout: 10000 }
+    ).then(($el) => {
+      for (let i = 0; i < 2; i++) {
+        cy.wrap($el).click({ force: true });
+        cy.wait(500);
+      }
+    });
+
+    // Next 2 times
+    cy.get(
+      ".e-con-inner > .elementor-element > .elementor-widget-container > .elementor-image-carousel-wrapper > .elementor-swiper-button-next",
+      { timeout: 10000 }
+    ).then(($el) => {
+      for (let i = 0; i < 2; i++) {
+        cy.wrap($el).click({ force: true });
+        cy.wait(500);
+      }
+    });
+  }
 }
 
-export default HomePage;   // 👈 export class
+export default HomePage;
