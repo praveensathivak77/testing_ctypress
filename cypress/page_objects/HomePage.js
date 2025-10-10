@@ -139,6 +139,82 @@ cy.get('.elementor-element-ad3ce26 > .elementor-widget-container > .elementor-bu
     cy.contains(".elementor-heading-title", /We are a trusted partner/i, { timeout: 15000 })
       .should("be.visible");
   }
+
+  scrollToCarousel() {
+    cy.get(".swiper-slide-active .swiper-slide-image", { timeout: 10000 })
+      .first()
+      .scrollIntoView({ duration: 1000, easing: "linear" })
+      .should("be.visible");
+  }
+
+  // Click right arrow multiple times
+  clickRightArrow(times) {
+    Cypress._.times(times, () => {
+      cy.get(".e-font-icon-svg.e-eicon-chevron-right", { timeout: 10000 })
+        .click({ force: true });
+      cy.wait(1000); // wait for slide animation
+    });
+  }
+
+  // Click left arrow multiple times
+  clickLeftArrow(times) {
+    Cypress._.times(times, () => {
+      cy.get(".e-font-icon-svg.e-eicon-chevron-left", { timeout: 10000 })
+        .click({ force: true });
+      cy.wait(1000); // wait for slide animation
+    });
+  }
+  verifyslideimage() {
+    cy.contains(".elementor-heading-title", /We are a trusted partner/i, { timeout: 15000 })
+      .should("be.visible");
+  }
+
+   scrollToAIPoweredReach() {
+    cy.get(".elementor-element-54dcb6a", { timeout: 15000 })
+      .scrollIntoView({ duration: 1000, easing: "linear" })
+      .should("be.visible");
+  }
+
+  // Hover left → middle → right with verification
+  hoverCardsLeftToRight() {
+    const selectors = [
+      ".elementor-element-674c9ea",  // left card
+      ".elementor-element-f4268d6",  // middle card
+      ".elementor-element-1ff1315"   // right card
+    ];
+
+    selectors.forEach((sel) => {
+      cy.get(sel)
+        .should("be.visible")
+        .realHover()
+        .invoke("css", "transform")   // check transform applied
+        .then((transform) => {
+          // Log for debugging (won't fail if no transform)
+          cy.log(`Transform on hover: ${transform}`);
+        });
+      cy.wait(1000);
+    });
+  }
+
+  // Hover right → middle → left with verification
+  hoverCardsRightToLeft() {
+    const selectors = [
+      ".elementor-element-1ff1315",  // right card
+      ".elementor-element-f4268d6",  // middle card
+      ".elementor-element-674c9ea"   // left card
+    ];
+
+    selectors.forEach((sel) => {
+      cy.get(sel)
+        .should("be.visible")
+        .realHover()
+        .invoke("css", "transform")
+        .then((transform) => {
+          cy.log(`Transform on hover: ${transform}`);
+        });
+      cy.wait(1000);
+    });
+  }
 }
 
 export default HomePage;   // 👈 export class

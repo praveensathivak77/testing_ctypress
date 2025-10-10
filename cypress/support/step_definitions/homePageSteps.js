@@ -99,5 +99,35 @@ Then("I return to the homepage of cubera", () => {
   homePage.clickLogo();
 });
 
+When("I scroll to the carousel section", () => {
+  homePage.scrollToCarousel();
+});
+
+When("I click the right arrow {int} times", (times) => {
+  homePage.clickRightArrow(times);
+});
+
+When("I click the left arrow {int} times", (times) => {
+  homePage.clickLeftArrow(times);
+});
+
+When("I scroll to the AI Powered Reach section", () => {
+  homePage.scrollToAIPoweredReach();
+});
+
+When("I hover over the AI Powered Reach cards from left to right", () => {
+  homePage.hoverCardsLeftToRight();
+});
+
+When("I hover back over the AI Powered Reach cards from right to left", () => {
+  homePage.hoverCardsRightToLeft();
+});
+
+Then("the AI Powered Reach section should remain visible", () => {
+  cy.get(".elementor-element-54dcb6a", { timeout: 10000 }).should("be.visible");
+});
+
+
+
 
 

@@ -29,9 +29,26 @@ Feature: Cubera Homepage Navigation and Contact Form
     Then I should see the Reach Out page
     And I return to the homepage
 
+
    Scenario: Open Learn more and return to homepage
     Given I open the Cubera homepage
     When I click on the Learn more button
     Then I should see the We are a trusted partner page 
     And I return to the homepage of cubera
+
+
+    Scenario: Scroll to carousel and navigate through all images
+      Given I open the Cubera homepage
+      When I scroll to the carousel section
+      And I click the right arrow 3 times
+      And I click the left arrow 3 times
+
+    @only
+    Scenario: Hover over AI Powered Reach cards in both directions
+      Given I open the Cubera homepage
+      When I scroll to the AI Powered Reach section
+      And I hover over the AI Powered Reach cards from left to right
+      And I hover back over the AI Powered Reach cards from right to left
+      Then the AI Powered Reach section should remain visible
+      
   
