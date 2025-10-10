@@ -182,4 +182,30 @@ Then("I click the carousel arrows twice each", () => {
   homePage.clickCarouselArrows();
 });
 
+When("I scroll to the recent blogs section", () => {
+  homePage.scrollToRecentBlogs();
+});
 
+Then("I should see the {string} heading1", (headingText) => {
+  cy.contains("h2", headingText, { timeout: 10000 }).should("be.visible");
+});
+
+Then("I click the image of the first blog", () => {
+  homePage.clickBlogImage();
+});
+
+Then("I should see the {string} blog page", (blogHeading) => {
+  cy.contains("h1, h2", blogHeading, { timeout: 10000 }).should("be.visible");
+});
+
+Then("I return to the homepage and blog", () => {
+  homePage.returnToHomepage();
+});
+
+Then("I click the title link of the second blog", () => {
+  homePage.clickSecondBlogTitle();
+});
+
+Then("I click the title link of the third blog", () => {
+  homePage.clickThirdBlogTitle();
+});

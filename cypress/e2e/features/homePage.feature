@@ -66,13 +66,38 @@ Feature: Cubera Homepage Navigation and Contact Form
       And I click the Ad Service
       Then I should see the Ad Service page
       And I return to the Core Service Offerings sections
-@only
+
     Scenario: Scroll to client testimonials
       Given I open the Cubera homepage
       When I scroll to the client testimonials section
       Then I should see the "What our clients say about us" heading
       And I click the carousel arrows twice each
+   @only
+   Scenario: Scroll to recent blogs and test blog navigation
+      Given I open the Cubera homepage
+      When I scroll to the recent blogs section
+      Then I should see the "Find out more in our recent blogs" heading1
 
+      # First blog
+      And I click the image of the first blog
+      Then I should see the "Cubera Cube Launches in India" blog page
+      And I return to the homepage and blog
+
+      # Second blog
+      And I click the title link of the second blog
+      Then I should see the "Cubera Unveils Edge & Hedwig inIndia, Ushering in a New Era of Data-Driven Advertising" blog page
+      And I return to the homepage and blog
+
+      # Third blog
+      And I click the title link of the third blog
+      Then I should see the "Omni Channel Advertising" blog page
+      And I return to the homepage and blog
+
+
+
+
+
+    
 
 
 

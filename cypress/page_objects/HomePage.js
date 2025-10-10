@@ -316,6 +316,47 @@ cy.get('.elementor-element-ad3ce26 > .elementor-widget-container > .elementor-bu
       }
     });
   }
+scrollToRecentBlogs() {
+    cy.contains("Find out more in our recent blogs")
+      .scrollIntoView({ duration: 2000 })
+      .should("be.visible");
+
+    cy.wait(2000);
+  }
+
+  clickBlogImage() {
+    cy.get('.post-id-2680 > .ultp-block-content-wrap > .ultp-block-entry-content > .ultp-block-image > a > img')
+      .scrollIntoView({ duration: 2000 })
+      .should("be.visible")
+      .click();
+
+    cy.wait(2000);
+  }
+
+  clickSecondBlogTitle() {
+    cy.get('.post-id-2644 > .ultp-block-content-wrap > .ultp-block-entry-content > .ultp-block-entry-heading > .ultp-block-title > a')
+      .scrollIntoView({ duration: 2000 })
+      .should("be.visible")
+      .click();
+
+    cy.wait(2000);
+  }
+
+  clickThirdBlogTitle() {
+    cy.get('.post-id-1477 > .ultp-block-content-wrap > .ultp-block-entry-content > .ultp-block-entry-heading > .ultp-block-title > a')
+      .scrollIntoView({ duration: 2000 })
+      .should("be.visible")
+      .click();
+
+    cy.wait(2000);
+  }
+
+  returnToHomepage() {
+    cy.go("back");
+    cy.contains("Find out more in our recent blogs", { timeout: 10000 }).should("be.visible");
+    cy.wait(2000);
+  }
 }
+
 
 export default HomePage;
