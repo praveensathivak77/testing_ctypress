@@ -215,17 +215,18 @@ cy.get('.elementor-element-ad3ce26 > .elementor-widget-container > .elementor-bu
       cy.wait(1000);
     });
   }
-   // ✅ New: Scroll until Core Service Offerings section
+ // ✅ Core Services scroll
   scrollToCoreServices() {
     cy.contains("h2", "Core Service Offerings", { timeout: 10000 })
-      .scrollIntoView()
+      .scrollIntoView({ duration: 1500 })
       .should("be.visible");
+    cy.wait(1000);
   }
 
   // -------- Omnichannel --------
   clickOmnichannelTargeting() {
     cy.contains(".elementor-heading-title", /omnichannel targeting/i, { timeout: 10000 })
-      .scrollIntoView()
+      .scrollIntoView({ duration: 1000 })
       .click({ force: true });
   }
 
@@ -237,7 +238,7 @@ cy.get('.elementor-element-ad3ce26 > .elementor-widget-container > .elementor-bu
   // -------- Identity Graph --------
   clickIdentityGraph() {
     cy.contains(".elementor-heading-title", /identity graph/i, { timeout: 10000 })
-      .scrollIntoView()
+      .scrollIntoView({ duration: 1000 })
       .click({ force: true });
   }
 
@@ -249,7 +250,7 @@ cy.get('.elementor-element-ad3ce26 > .elementor-widget-container > .elementor-bu
   // -------- AI Cohort Generation --------
   clickAICohortGeneration() {
     cy.contains(".elementor-heading-title", /ai cohort generation/i, { timeout: 10000 })
-      .scrollIntoView()
+      .scrollIntoView({ duration: 1000 })
       .click({ force: true });
   }
 
@@ -261,7 +262,7 @@ cy.get('.elementor-element-ad3ce26 > .elementor-widget-container > .elementor-bu
   // -------- Ad Service --------
   clickAdService() {
     cy.contains(".elementor-heading-title", /ad service/i, { timeout: 10000 })
-      .scrollIntoView()
+      .scrollIntoView({ duration: 1000 })
       .click({ force: true });
   }
 
@@ -269,6 +270,12 @@ cy.get('.elementor-element-ad3ce26 > .elementor-widget-container > .elementor-bu
     cy.contains("h1, h2, h3", /ad service/i, { timeout: 15000 })
       .should("be.visible");
   }
+  // ✅ Return back and scroll to Core Service Offerings
+returnToCoreServices() {
+  cy.go("back"); // navigate back
+  this.scrollToCoreServices(); // re-scroll to section
+}
+
 
 
 // ---------- Client Testimonials ----------

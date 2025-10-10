@@ -50,7 +50,7 @@ Feature: Cubera Homepage Navigation and Contact Form
       And I hover over the AI Powered Reach cards from left to right
       And I hover back over the AI Powered Reach cards from right to left
       Then the AI Powered Reach section should remain visible
-   
+   @only
    Scenario: Navigate to services and return to Core Service Offerings
       Given I open the Cubera homepage
       When I scroll to the Core Service Offerings section
@@ -65,14 +65,14 @@ Feature: Cubera Homepage Navigation and Contact Form
       And I return to the Core Service Offerings section
       And I click the Ad Service
       Then I should see the Ad Service page
-      And I return to the Core Service Offerings sections
+      And I return to the Core Service Offerings sections 
 
     Scenario: Scroll to client testimonials
       Given I open the Cubera homepage
       When I scroll to the client testimonials section
       Then I should see the "What our clients say about us" heading
       And I click the carousel arrows twice each
-   @only
+   
    Scenario: Scroll to recent blogs and test blog navigation
       Given I open the Cubera homepage
       When I scroll to the recent blogs section
