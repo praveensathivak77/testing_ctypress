@@ -233,3 +233,52 @@ Then("I should see correct answers displayed", () => {
 Then("I scroll to the bottom of the page", () => {
   homePage.scrollToPageEnd();
 });
+
+When("I scroll to the bottom of the page cubera", () => {
+  homePage.scrollToPageEnd();
+});
+
+When("I click the Home link from footer", () => {
+  homePage.clickFooterLink("home");
+});
+
+When("I click the About Us link from footer", () => {
+  homePage.clickFooterLink("about");
+});
+
+When("I click the Our Solutions link from footer", () => {
+  homePage.clickFooterLink("solutions");
+});
+
+When("I click the Platforms link from footer", () => {
+  homePage.clickFooterLink("platforms");
+});
+
+When("I click the Contact link from footer", () => {
+  homePage.clickFooterLink("contact");
+});
+
+Then("I should see the {string}", (headingText) => {
+  cy.contains("h1,h2,h3", headingText, { timeout: 10000 }).should("be.visible");
+});
+
+Then("I click the Cubera logo to return home", () => {
+  homePage.clickCuberaLogo();
+});
+
+When("I scroll to the bottom of the page site", () => {
+  homePage.scrollToPageEnd();
+});
+
+When("I click the {string} link from quick links", (linkName) => {
+  homePage.clickQuickLink(linkName);
+});
+
+Then("I should see the {string} headingss", (headingText) => {
+  cy.contains(headingText, { timeout: 10000 }).should("be.visible");
+});
+
+
+Then("I click the Cubera logo to return home page", () => {
+  homePage.clickCuberaLogo();
+});

@@ -107,6 +107,85 @@ Feature: Cubera Homepage Navigation and Contact Form
       And I scroll to the bottom of the page
 
 
+  Scenario: Navigate footer links and validate pages
+      Given I open the Cubera homepage
+      When I scroll to the bottom of the page cubera
+      And I click the Home link from footer
+      Then I should see the "Building the AdTech Ecosystem for the Future"
+      And I click the Cubera logo to return home
+
+      When I scroll to the bottom of the page
+      And I click the About Us link from footer
+      Then I should see the "We are a trusted partner in our clients' AI journey"
+      And I click the Cubera logo to return home
+
+      When I scroll to the bottom of the page
+      And I click the Our Solutions link from footer
+      Then I should see the "Our Solutions" 
+      And I click the Cubera logo to return home
+
+      When I scroll to the bottom of the page
+      And I click the Platforms link from footer
+      Then I should see the "Our Platforms"
+      And I click the Cubera logo to return home
+
+      When I scroll to the bottom of the page
+      And I click the Contact link from footer
+      Then I should see the "Get in touch with us"
+      And I click the Cubera logo to return home
+
+@only
+  Scenario: Navigate footer quick links and validate pages
+      Given I open the Cubera homepage
+      When I scroll to the bottom of the page site
+      And I click the "Cube" link from quick links
+      Then I should see the "CUBE" 
+      And I click the Cubera logo to return home
+
+      When I scroll to the bottom of the page
+      And I click the "Edge" link from quick links
+      Then I should see the "Edge"
+      And I click the Cubera logo to return home
+
+      When I scroll to the bottom of the page
+      And I click the "Vertex" link from quick links
+      Then I should see the "Vertex"
+      And I click the Cubera logo to return home
+
+      When I scroll to the bottom of the page
+      And I click the "Identity Graph" link from quick links
+      Then I should see the "Identity Graph"
+      And I click the Cubera logo to return home
+
+      When I scroll to the bottom of the page
+      And I click the "Privacy Policy" link from quick links
+      Then I should see the "Privacy Policy"
+      And I click the Cubera logo to return home
+
+      When I scroll to the bottom of the page
+      And I click the "Terms" link from quick links
+      Then I should see the "Terms" 
+      And I click the Cubera logo to return home
+
+      When I scroll to the bottom of the page
+      And I click the "Disclaimer" link from quick links
+      Then I should see the "Disclaimer" 
+      And I click the Cubera logo to return home
+
+      When I scroll to the bottom of the page
+      And I click the "Cookie Policy" link from quick links
+      Then I should see the "Cookie Policy" 
+      And I click the Cubera logo to return home
+
+      When I scroll to the bottom of the page
+      And I click the "Career" link from quick links
+      Then I should see the "Career" 
+      And I click the Cubera logo to return home
+
+      When I scroll to the bottom of the page
+      And I click the "Glossary" link from quick links
+      Then I should see the "Glossary" 
+      And I click the Cubera logo to return home page
 
 
 
@@ -114,13 +193,17 @@ Feature: Cubera Homepage Navigation and Contact Form
 
 
 
-    
 
 
 
-      
+
+                
 
 
 
-      
-  
+                  
+
+
+
+                  
+              

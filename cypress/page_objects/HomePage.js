@@ -417,5 +417,82 @@ scrollToRecentBlogs() {
     cy.scrollTo("bottom", { duration: 5000 }); // smooth scroll to end
     cy.wait(2000); // pause to observe
 }
+scrollToPageEnd() {
+    cy.scrollTo("bottom", { duration: 2000 });
+    cy.wait(1000);
+  }
+
+  clickFooterLink(linkName) {
+  switch (linkName.toLowerCase()) {
+    case "home":
+      cy.get('footer a[href="https://cubera.co/"]').click({ force: true });
+      break;
+    case "about":
+      cy.get('footer a[href="https://cubera.co/about-us/"]').click({ force: true });
+      break;
+    case "solutions":
+      cy.get('footer a[href="https://cubera.co/our-solutions/"]').click({ force: true });
+      break;
+    case "platforms":
+      cy.get('footer a[href="https://cubera.co/platforms/"]').click({ force: true });
+      break;
+    case "contact":
+      cy.get('footer a[href="https://cubera.co/contact/"]').click({ force: true });
+      break;
+    default:
+      throw new Error("Invalid footer link name: " + linkName);
+  }
+  cy.wait(4000);
+}
+scrollToPageEnd() {
+    cy.scrollTo("bottom", { duration: 2000 });
+    cy.wait(1000);
+  }
+
+  clickQuickLink(linkName) {
+    switch (linkName.toLowerCase()) {
+      case "cube":
+        cy.get('footer a[href="https://cubera.co/cube/"]').click({ force: true });
+        break;
+      case "edge":
+        cy.get('footer a[href="https://cubera.co/edge/"]').click({ force: true });
+        break;
+      case "vertex":
+        cy.get('footer a[href="https://cubera.co/vertex/"]').click({ force: true });
+        break;
+      case "identity graph":
+        cy.get('footer a[href="https://cubera.co/identity-graph/"]').click({ force: true });
+        break;
+      case "privacy policy":
+        cy.get('footer a[href="https://cubera.co/privacy-policy/"]').click({ force: true });
+        break;
+      case "terms":
+        cy.get('footer a[href="https://cubera.co/terms/"]').click({ force: true });
+        break;
+      case "disclaimer":
+        cy.get('footer a[href="https://cubera.co/disclaimer/"]').click({ force: true });
+        break;
+      case "cookie policy":
+        cy.get('footer a[href="https://cubera.co/cookie-policy/"]').click({ force: true });
+        break;
+      case "career":
+        cy.get('footer a[href="https://cubera.co/career/"]').click({ force: true });
+        break;
+      case "glossary":
+        cy.get('footer a[href="https://cubera.co/glossary/"]').click({ force: true });
+        break;
+      default:
+        throw new Error("Invalid quick link name: " + linkName);
+    }
+    cy.wait(2000);
+  }
+
+  clickCuberaLogo() {
+  cy.get('img.attachment-full.size-full.wp-image-503')
+    .first()
+    .click({ force: true });
+
+  cy.wait(2000);
+}
 }
 export default HomePage;
