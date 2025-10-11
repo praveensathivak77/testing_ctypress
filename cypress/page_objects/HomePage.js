@@ -489,7 +489,7 @@ scrollToPageEnd() {
 
   clickCuberaLogo() {
   cy.get('img.attachment-full.size-full.wp-image-503')
-    .first()
+
     .click({ force: true });
 
   cy.wait(2000);
