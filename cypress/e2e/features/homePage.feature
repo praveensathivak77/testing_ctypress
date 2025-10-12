@@ -105,8 +105,7 @@ Feature: Cubera Homepage Navigation and Contact Form
       And I click each FAQ one by one
       Then I should see correct answers displayed
       And I scroll to the bottom of the page
-
-@only
+      
   Scenario: Visit each main footer menu link, verify content, and return home
     Given I open the Cubera homepage
     When I scroll to the bottom of the page 1
