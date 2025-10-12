@@ -10,7 +10,7 @@ Given("I open the Cubera homepage and Our Solution", () => {
   cy.wait(2000);
 });
 
-// ✅ Hover over the Our Solutions menu
+// ✅ Hover over Our Solutions menu
 When("I hover over the Our Solutions menu", () => {
   ourSolutionsPage.hoverOnOurSolutionsMenu();
 });
@@ -20,24 +20,33 @@ When("I click the Omnichannel Targeting menu item", () => {
   ourSolutionsPage.clickOmnichannelMenuItem();
 });
 
-// ✅ Clean heading assertion
-Then("I should see the cleanly {string}", (headingText) => {
+// ✅ Click Identity Graph
+When("I click the Identity Graph menu item", () => {
+  ourSolutionsPage.clickIdentityGraphMenuItem();
+});
+
+// ✅ Assertions
+Then("I should see the text {string}", (headingText) => {
   cy.contains(headingText, { timeout: 15000 }).should("be.visible");
 });
 
+// ✅ Click Reachout
 When("I click the Reachout", () => {
   ourSolutionsPage.clickReachoutButton();
 });
 
-Then("I should see {string}", (headingText) => {
-  cy.contains(headingText, { timeout: 15000 }).should("be.visible");
-});
-
+// ✅ Go back
 Then("I go back to the Omnichannel Targeting page", () => {
   cy.go("back");
   cy.wait(2000);
 });
 
+// ✅ Validate Omnichannel
 Then("I slowly scroll and validate Omnichannel content", () => {
-  ourSolutionsPage.validateOmnichannelContent();
+  ourSolutionsPage.runOmnichannelFlow();
+});
+
+// ✅ Validate Identity Graph
+Then("I slowly scroll and validate Identity Graph content", () => {
+  ourSolutionsPage.runIdentityGraphFlow();
 });
