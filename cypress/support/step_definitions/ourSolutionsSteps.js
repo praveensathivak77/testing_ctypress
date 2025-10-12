@@ -3,34 +3,37 @@ import OurSolutionsPage from "../../page_objects/OurSolutionsPage";
 
 const ourSolutionsPage = new OurSolutionsPage();
 
-// ✅ Open homepage
+// ✅ Common Step: Open Homepage
 Given("I open the Cubera homepage and Our Solution", () => {
   cy.viewport(1366, 768);
   cy.visit("https://cubera.co/");
   cy.wait(2000);
 });
 
-// ✅ Hover over Our Solutions menu
+// ✅ Hover
 When("I hover over the Our Solutions menu", () => {
   ourSolutionsPage.hoverOnOurSolutionsMenu();
 });
 
-// ✅ Click Omnichannel Targeting
+// ✅ Menu clicks
 When("I click the Omnichannel Targeting menu item", () => {
   ourSolutionsPage.clickOmnichannelMenuItem();
 });
 
-// ✅ Click Identity Graph
 When("I click the Identity Graph menu item", () => {
   ourSolutionsPage.clickIdentityGraphMenuItem();
 });
 
+When("I click the AI Cohort Generation menu item", () => {
+  ourSolutionsPage.clickAICohortMenuItem();
+});
+
 // ✅ Assertions
-Then("I should see the text {string}", (headingText) => {
+Then("I should see the og {string}", (headingText) => {
   cy.contains(headingText, { timeout: 15000 }).should("be.visible");
 });
 
-// ✅ Click Reachout
+// ✅ Reachout
 When("I click the Reachout", () => {
   ourSolutionsPage.clickReachoutButton();
 });
@@ -41,12 +44,15 @@ Then("I go back to the Omnichannel Targeting page", () => {
   cy.wait(2000);
 });
 
-// ✅ Validate Omnichannel
+// ✅ Validations
 Then("I slowly scroll and validate Omnichannel content", () => {
   ourSolutionsPage.runOmnichannelFlow();
 });
 
-// ✅ Validate Identity Graph
 Then("I slowly scroll and validate Identity Graph content", () => {
   ourSolutionsPage.runIdentityGraphFlow();
+});
+
+Then("I slowly scroll and validate AI Cohort Generation content", () => {
+  ourSolutionsPage.runAICohortFlow();
 });
