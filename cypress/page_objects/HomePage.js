@@ -422,186 +422,78 @@ scrollToPageEnd() {
     cy.wait(1000);
   }
 
-  visitAllMainFooterMenuLinks() {
-    const mainFooterLinks = [
-      {
-        selector: "#menu-item-1669 > .hfe-menu-item",
-        name: "Home",
-        expectedRegex: /Building the AdTech Ecosystem for the Future/i,
-      },
-      {
-        selector: "#menu-item-1670 > .hfe-menu-item",
-        name: "About",
-        expectedRegex: /We are a trusted partner in[\s\S]*AI journey/i,
-      },
-      {
-        selector: "#menu-item-1823 > .hfe-menu-item",
-        name: "Solutions",
-        expectedRegex: /Our Solutions/i,
-      },
-      {
-        selector: "#menu-item-1672 > .hfe-menu-item",
-        name: "Platforms",
-        expectedRegex: /Our Platforms/i,
-      },
-      {
-        selector: "#menu-item-2643 > .hfe-menu-item",
-        name: "Contact",
-        expectedRegex: /Get in touch with us/i,
-      },
-    ];
-
-    mainFooterLinks.forEach((link, index) => {
-      cy.log(`🔗 Visiting main footer link ${index + 1}: ${link.name}`);
-
-      // Always start fresh from homepage
-      cy.visit("https://cubera.co/");
-      cy.wait(2000);
-      this.scrollToPageEnd();
-
-      // Click footer link
-      cy.get(link.selector, { timeout: 15000 })
-        .should("exist")
-        .scrollIntoView()
-        .click({ force: true });
-
-      // Wait for the page to load
-      cy.wait(3000);
-
-      // ✅ Log page title
-      cy.title().then((pageTitle) => {
-        cy.log(`📄 Page title for "${link.name}": ${pageTitle}`);
-      });
-
-      // ✅ Verify expected text is visible
-      cy.contains(link.expectedRegex, { timeout: 20000 })
-        .scrollIntoView()
-        .should("be.visible")
-        .then(() => cy.log(`✅ Verified content for "${link.name}"`));
-
-      // Scroll behavior for better stability
-      cy.scrollTo("bottom", { duration: 1000 });
-      cy.scrollTo("top", { duration: 1000 });
-
-      // ✅ Return to homepage via Cubera logo
-      cy.get('img.attachment-full.size-full.wp-image-503')
-        .should("be.visible")
-        .scrollIntoView()
-        .click({ force: true });
-      cy.wait(2000);
-
-      // ✅ Confirm home page is loaded
-      cy.location("pathname", { timeout: 15000 }).should("eq", "/");
-      cy.wait(1500);
-    });
-
-    cy.log("🎯 All main footer menu links visited and verified successfully!");
-  
+  clickFooterLink(linkName) {
+  switch (linkName.toLowerCase()) {
+    case "home":
+      cy.get('footer a[href="https://cubera.co/"]').click({ force: true });
+      break;
+    case "about":
+      cy.get('footer a[href="https://cubera.co/about-us/"]').click({ force: true });
+      break;
+    case "solutions":
+      cy.get('footer a[href="https://cubera.co/our-solutions/"]').click({ force: true });
+      break;
+    case "platforms":
+      cy.get('footer a[href="https://cubera.co/platforms/"]').click({ force: true });
+      break;
+    case "contact":
+      cy.get('footer a[href="https://cubera.co/contact/"]').click({ force: true });
+      break;
+    default:
+      throw new Error("Invalid footer link name: " + linkName);
+  }
+  cy.wait(4000);
 }
 scrollToPageEnd() {
     cy.scrollTo("bottom", { duration: 2000 });
     cy.wait(1000);
   }
-visitAllFooterLinksWithAssertions() {
-    const footerLinks = [
-      {
-        selector: '#menu-item-1679 > .hfe-menu-item',
-        name: 'Cube',
-        expectedRegex: /CUBE is an AI-driven Audience Discovery Platform/i
-      },
-      {
-        selector: '#menu-item-1678 > .hfe-menu-item',
-        name: 'Edge',
-        expectedRegex: /Edge is an advanced omnichannel Demand Side Platform/i
-      },
-      {
-        selector: '#menu-item-1677 > .hfe-menu-item',
-        name: 'Vertex',
-        expectedRegex: /Vertex is our AdExchange designed/i
-      },
-      {
-        selector: '#menu-item-1680 > .hfe-menu-item',
-        name: 'Identity Graph',
-        expectedRegex: /Cubera.?s Identity Graph provides a unified/i
-      },
-      {
-        selector: '#menu-item-1685 > .hfe-menu-item',
-        name: 'Privacy Policy',
-        expectedRegex: /Cuberatech India Private Limited/i
-      },
-      {
-        selector: '#menu-item-1710 > .hfe-menu-item',
-        name: 'Terms',
-        expectedRegex: /WEBSITE TERMS AND CONDITIONS/i
-      },
-      {
-        selector: '#menu-item-1722 > .hfe-menu-item',
-        name: 'Disclaimer',
-        expectedRegex: /DISCLAIMER[\s\S]*www\.cubera\.co/i
-      },
-      {
-        selector: '#menu-item-1728 > .hfe-menu-item',
-        name: 'Cookie Policy',
-        expectedRegex: /This Website Uses Cookies/i
-      },
-      {
-        selector: '#menu-item-1681 > .hfe-menu-item',
-        name: 'Career',
-        expectedRegex: /Join a team where your passion meets purpose/i
-      },
-      {
-        selector: '#menu-item-1734 > .hfe-menu-item',
-        name: 'Glossary',
-        expectedRegex: /Glossary/i
-      }
-    ];
 
-    footerLinks.forEach((link, index) => {
-      cy.log(`🔗 Visiting footer link ${index + 1}: ${link.name}`);
-
-      // Always start from homepage
-      cy.visit("https://cubera.co/");
-      cy.wait(2000);
-      cy.scrollTo("bottom", { duration: 1000 });
-
-      // Click footer link
-      cy.get(link.selector, { timeout: 15000 })
-        .should("exist")
-        .scrollIntoView()
-        .click({ force: true });
-
-      // Wait for new page to load
-      cy.wait(3000);
-
-      // ✅ Log page title
-      cy.title().then((pageTitle) => {
-        cy.log(`📄 Page title for "${link.name}": ${pageTitle}`);
-      });
-
-      // ✅ Scroll to ensure visibility before verifying text
-      cy.scrollTo("bottom", { duration: 1000 });
-      cy.scrollTo("top", { duration: 1000 });
-
-      // ✅ Verify expected text (regex-safe)
-      cy.contains(link.expectedRegex, { timeout: 20000 })
-        .scrollIntoView()
-        .should("be.visible")
-        .then(() => cy.log(`✅ Verified content for "${link.name}"`));
-
-      // ✅ Return to homepage
-      cy.get('img.attachment-full.size-full.wp-image-503')
-        .should("be.visible")
-        .scrollIntoView()
-        .click({ force: true });
-      cy.wait(2000);
-
-      // ✅ Confirm homepage loaded
-      cy.location("pathname", { timeout: 15000 }).should("eq", "/");
-      cy.wait(1500);
-    });
-
-    cy.log("🎯 All footer links visited, verified titles, and validated content successfully!");
+  clickQuickLink(linkName) {
+    switch (linkName.toLowerCase()) {
+      case "cube":
+        cy.get('footer a[href="https://cubera.co/cube/"]').click({ force: true });
+        break;
+      case "edge":
+        cy.get('footer a[href="https://cubera.co/edge/"]').click({ force: true });
+        break;
+      case "vertex":
+        cy.get('footer a[href="https://cubera.co/vertex/"]').click({ force: true });
+        break;
+      case "identity graph":
+        cy.get('footer a[href="https://cubera.co/identity-graph/"]').click({ force: true });
+        break;
+      case "privacy policy":
+        cy.get('footer a[href="https://cubera.co/privacy-policy/"]').click({ force: true });
+        break;
+      case "terms":
+        cy.get('footer a[href="https://cubera.co/terms/"]').click({ force: true });
+        break;
+      case "disclaimer":
+        cy.get('footer a[href="https://cubera.co/disclaimer/"]').click({ force: true });
+        break;
+      case "cookie policy":
+        cy.get('footer a[href="https://cubera.co/cookie-policy/"]').click({ force: true });
+        break;
+      case "career":
+        cy.get('footer a[href="https://cubera.co/career/"]').click({ force: true });
+        break;
+      case "glossary":
+        cy.get('footer a[href="https://cubera.co/glossary/"]').click({ force: true });
+        break;
+      default:
+        throw new Error("Invalid quick link name: " + linkName);
+    }
+    cy.wait(2000);
   }
-}
 
+  clickCuberaLogo() {
+  cy.get('img.attachment-full.size-full.wp-image-503')
+
+    .click({ force: true });
+
+  cy.wait(2000);
+  }
+
+}
 export default HomePage;

@@ -69,3 +69,21 @@ Then("I go back to the Our Solutions page", () => {
   cy.go("back");
   cy.wait(2500);
 });
+
+When("I click the Ad Service menu item", () => {
+  ourSolutionsPage.clickAdServiceMenuItem();
+});
+
+Then("I slowly scroll and validate Ad Service content", () => {
+  ourSolutionsPage.runAdServiceFlow();
+});
+
+When("I click the For Publishers menu item", () => {
+  ourSolutionsPage.clickForPublishersMenuItem();
+});
+
+Then("I slowly scroll and validate For Publishers content", () => {
+  ourSolutionsPage.runForPublishersFlow();
+});
+
+

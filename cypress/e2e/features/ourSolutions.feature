@@ -21,3 +21,16 @@ Feature: Validate all pages and sections under "Our Solutions" on Cubera website
     Then I should see the solution section "AI Cohort Generation"
     And I slowly scroll and validate AI Cohort Generation content
     And I go back to the Our Solutions page
+
+  Scenario: Validate Ad Service page content
+    When I click the Ad Service menu item
+    Then I should see the solution section "Ad Service"
+    And I slowly scroll and validate Ad Service content
+    And I go back to the Our Solutions page
+
+  Scenario: Validate For Publishers page content
+    When I click the For Publishers menu item
+    Then I should see the solution section "For Publishers"
+    And I slowly scroll and validate For Publishers content
+    And I go back to the Our Solutions page
+
