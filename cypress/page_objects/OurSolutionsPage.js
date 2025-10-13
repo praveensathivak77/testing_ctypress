@@ -1,157 +1,166 @@
-class OurPlatformsPage {
+class OurSolutionsPage {
   // ==========================
   // 🔹 Shared Utilities
   // ==========================
-
-  hoverOnOurPlatformsMenu() {
+  hoverOnOurSolutionsMenu() {
     cy.viewport(1366, 768);
-    cy.contains("Our Platforms", { timeout: 10000 })
-      .should("exist")
-      .realHover("mouse");
-    cy.wait(1200);
+    cy.contains("Our Solutions").should("exist").realHover();
+    cy.wait(1500);
   }
 
-  clickMenuItem(name) {
-    cy.log(`🖱️ Clicking ${name} submenu...`);
-    cy.contains("a", name, { timeout: 10000 })
-      .should("be.visible")
-      .click({ force: true });
+  clickMenuItem(selector, name) {
+    cy.log(`Clicking ${name}...`);
+    cy.get(selector, { timeout: 10000 }).filter(":visible").click({ force: true });
     cy.wait(2000);
   }
 
-  clickButton(selector) {
-    cy.get(selector, { timeout: 10000 })
-      .filter(":visible")
-      .first()
+  clickReachoutButton() {
+    cy.get('.elementor-element-1b21d01 .elementor-button', { timeout: 15000 })
       .scrollIntoView()
       .should("be.visible")
-      .invoke("removeAttr", "target")
       .click({ force: true });
-    cy.wait(1500);
+    cy.wait(2000);
     cy.go("back");
+    cy.wait(2000);
   }
 
-  assertSection(text, selector = null) {
-    if (selector)
-      cy.get(selector).scrollIntoView({ duration: 1500 }).should("be.visible");
-    cy.contains(text, { timeout: 10000 }).should("be.visible");
+  handleVideoPopup(imageSelector, closeSelector) {
+    cy.get(imageSelector).scrollIntoView({ duration: 2000 }).should("be.visible");
+    cy.get('a > .attachment-large').click({ force: true });
+    cy.wait(3500);
+    cy.get(closeSelector, { timeout: 10000 }).click({ force: true });
+    cy.wait(1500);
   }
 
   handleCarouselArrows(leftSelector, rightSelector, count = 6) {
     for (let i = 0; i < count; i++) {
-      cy.get(leftSelector).first().click({ force: true });
-      cy.wait(250);
+      cy.get(leftSelector).click({ force: true });
+      cy.wait(800);
     }
     for (let i = 0; i < count; i++) {
-      cy.get(rightSelector).first().click({ force: true });
-      cy.wait(250);
+      cy.get(rightSelector).click({ force: true });
+      cy.wait(800);
     }
   }
 
-  clickAccordion(minusSelector, plusSelector) {
-    cy.get(minusSelector).first().scrollIntoView().click({ force: true });
-    cy.wait(300);
-    cy.get(plusSelector).first().scrollIntoView().click({ force: true });
-    cy.wait(300);
-    cy.get(plusSelector).eq(1).scrollIntoView().click({ force: true });
-    cy.wait(300);
-  }
-
-  scrollBottom() {
-    cy.scrollTo("bottom", { duration: 2000 });
-    cy.wait(1000);
+  assertSection(containsText, selector = null) {
+    if (selector) cy.get(selector).scrollIntoView({ duration: 2000 }).should("be.visible");
+    cy.contains(containsText, { timeout: 15000 }).should("be.visible");
   }
 
   // ==========================
   // 🔹 Menu Clicks
   // ==========================
-
-  clickCubeMenu() { this.clickMenuItem("Cube"); }
-  clickIdentityGraphMenu() { this.clickMenuItem("Cubera Identity Graph"); }
-  clickEdgeMenu() { this.clickMenuItem("Edge"); }
-  clickVertexMenu() { this.clickMenuItem("Vertex"); }
-
-  // ==========================
-  // 🔹 Cube Flow
-  // ==========================
-  validateCubeSections() {
-    cy.log("🚀 Validating Cube platform...");
-    this.assertSection("CUBE is an AI-driven Audience Discovery");
-    this.clickButton(".elementor-element-1b21d01 .elementor-button");
-    this.assertSection("From Data to Actionable Signals");
-    this.clickButton(".elementor-element-1679ab3 .elementor-button");
-    this.assertSection("Our Trusted Partners", ".elementor-element-a38961e");
-    this.handleCarouselArrows(".e-eicon-chevron-left", ".e-eicon-chevron-right");
-    this.scrollBottom();
-    cy.log("🎯 Cube validation complete!");
+  clickOmnichannelMenuItem() {
+    this.clickMenuItem('.menu-item-1552 > a', "Omnichannel Targeting");
+  }
+  clickIdentityGraphMenuItem() {
+    this.clickMenuItem('.menu-item-1553 > a', "Identity Graph");
+  }
+  clickAICohortMenuItem() {
+    this.clickMenuItem('.menu-item-1554 > a', "AI Cohort Generation");
+  }
+  clickAdServiceMenuItem() {
+    this.clickMenuItem('.menu-item-1555 > a', "Ad Service");
+  }
+  clickForPublishersMenuItem() {
+    this.clickMenuItem('.menu-item-1556 > a', "For Publishers");
   }
 
   // ==========================
-  // 🔹 Cubera Identity Graph Flow
+  // 🔹 Omnichannel Flow
+  // ==========================
+  validateOmnichannelSections() {
+    cy.scrollTo("center");
+    this.assertSection("Connecting when they love to");
+    this.assertSection("Omnichannel Targeting is playing a pivotal role via");
+    this.assertSection("Activate campaigns across platforms", '.elementor-element-88c1ed3 img');
+    cy.get('.elementor-element-3c2f63f .elementor-button').click({ force: true });
+    cy.go("back");
+
+    this.assertSection("Our Trusted Partners", '.elementor-element-9053a2a');
+    this.handleCarouselArrows('.e-eicon-chevron-left', '.e-eicon-chevron-right', 5);
+    cy.scrollTo("bottom");
+  }
+
+  // ==========================
+  // 🔹 Identity Graph Flow
   // ==========================
   validateIdentityGraphSections() {
-    cy.log("🧭 Validating Cubera Identity Graph...");
-    this.assertSection("Cubera Identity Graph");
-    this.clickButton(".elementor-element-1b21d01 .elementor-button");
-    this.assertSection("Unified Insights, Personalized Marketing", ".elementor-element-3ce8ef5");
-    this.clickButton(".elementor-element-1679ab3 .elementor-button");
-    this.assertSection("360-Degree Customer View", ".elementor-element-1d8102a");
-    this.assertSection("Our Trusted Partners", ".elementor-element-a38961e");
-    this.handleCarouselArrows(".e-eicon-chevron-left", ".e-eicon-chevron-right");
-    this.scrollBottom();
-    cy.log("🎯 Identity Graph validation complete!");
+    this.assertSection("Identity Graph");
+    this.clickReachoutButton();
+    this.assertSection("Unlocking the Full Picture", '.elementor-element-83a5654 img');
+    this.assertSection("Insightful AI-Powered Audience Segments");
+    this.assertSection("Unleash the Power of Unified Customer Data");
+    this.assertSection("Utilize our cutting-edge, adaptable tech stack");
+    cy.get('.elementor-element-3c2f63f .elementor-button').click({ force: true });
+    cy.go("back");
+    this.assertSection("Our Trusted Partners", '.elementor-element-9053a2a');
+    this.handleCarouselArrows('.e-eicon-chevron-right', '.e-eicon-chevron-left');
+    cy.scrollTo("bottom");
   }
 
   // ==========================
-  // 🔹 Edge Flow
+  // 🔹 AI Cohort Flow
   // ==========================
-  validateEdgeSections() {
-    cy.log("⚡ Validating Edge platform...");
-    this.assertSection("Edge");
-    this.clickButton(".elementor-element-1b21d01 .elementor-button-text");
-    this.assertSection("Driving High Impact Campaigns", ".elementor-element-3ce8ef5");
-    this.clickButton(".elementor-element-1679ab3 .elementor-button");
-    this.assertSection("AI optimized ad performance", ".elementor-element-a27fb90");
-    this.assertSection("Our Trusted Partners", ".elementor-element-a38961e");
-    this.handleCarouselArrows(".e-eicon-chevron-left", ".e-eicon-chevron-right");
-    this.assertSection("Designed to transform advertising", ".elementor-element-c06ca8a");
-    cy.get(".e-fas-minus, .e-fas-plus").each(($icon) => {
-      cy.wrap($icon).scrollIntoView().click({ force: true });
-      cy.wait(400);
-    });
-    this.clickButton(".elementor-element-8b463c6 .elementor-button-text");
-    this.scrollBottom();
-    cy.log("🎯 Edge validation complete!");
+  validateAICohortSections() {
+    this.assertSection("AI Cohort Generation");
+    this.clickReachoutButton();
+    this.assertSection("Precision Targeting at Scale", '.elementor-element-187eb51');
+    this.assertSection("Insightful AI-Powered");
+    this.handleVideoPopup('.elementor-widget-container > .attachment-large', '.sgpb-popup-close-button-1');
+    this.assertSection("Dynamic Data-Driven");
+    this.assertSection("Utilize our cutting-edge", '.elementor-element-5c4f6ed img');
+    cy.get('.elementor-element-3c2f63f .elementor-button').click({ force: true });
+    cy.go("back");
+    this.assertSection("Our Trusted Partners", '.elementor-element-a38961e');
+    this.handleCarouselArrows('.e-eicon-chevron-left', '.e-eicon-chevron-right');
+    cy.scrollTo("bottom");
   }
 
   // ==========================
-  // 🔹 Vertex Flow
+  // 🔹 Ad Service Flow
   // ==========================
-  validateVertexSections() {
-    cy.log("💠 Validating Vertex platform...");
-    cy.url().should("include", "/vertex");
-    this.assertSection("Vertex");
+  validateAdServiceSections() {
+    this.clickReachoutButton();
+    this.assertSection("Ad Services to Suit Your Way", '.elementor-element-83a5654 img');
+    this.assertSection("Effortless Precision Ads for Ultimate Success", '.elementor-element-34603dc');
+    this.handleVideoPopup('.elementor-widget-container > .attachment-large', '.sgpb-popup-close-button-1');
+    this.assertSection("Skyrocket your ROAS with us");
+    this.assertSection("Utilize our cutting-edge, adaptable tech stack", '.elementor-element-7b5bfab');
+    cy.get('.elementor-element-3c2f63f .elementor-button').click({ force: true });
+    cy.go("back");
+    this.assertSection("Our Trusted Partners", '.elementor-element-a38961e');
+    this.handleCarouselArrows('.e-eicon-chevron-left', '.e-eicon-chevron-right');
+    cy.scrollTo("bottom");
+  }
 
-    this.clickButton(".elementor-element-1b21d01 .elementor-button");
-    this.assertSection("Unique Signals, Flawless Precision", ".elementor-element-3ce8ef5");
-    this.clickButton(".elementor-element-1679ab3 .elementor-button");
-    this.assertSection("Every Impression is Maximized", ".elementor-element-608fc4d");
-    this.assertSection("Our Trusted Partners", ".elementor-element-a38961e");
-    this.handleCarouselArrows(".e-eicon-chevron-left", ".e-eicon-chevron-right");
-    this.assertSection("High Volumes, Minimal Latency", ".elementor-element-4f7b2cd");
-    this.clickAccordion(".e-fas-minus", ".e-fas-plus");
-    this.clickButton(".elementor-element-591e26a .elementor-button");
-    this.scrollBottom();
-    cy.log("🎯 Vertex validation complete!");
+  // ==========================
+  // 🔹 For Publishers Flow
+  // ==========================
+  validateForPublishersSections() {
+    this.assertSection("For Publishers");
+    this.clickReachoutButton();
+    this.assertSection("Maximize Revenue from Inventory", '.elementor-element-83a5654 img');
+    this.assertSection("A Great way to Monetize your Inventory", '.elementor-element-34603dc');
+    this.handleVideoPopup('.elementor-element-0af373c img', '.sgpb-popup-close-button-1');
+    this.assertSection("Real Conversions for Publishers");
+    this.assertSection("Utilize our cutting-edge, adaptable tech stack", '.elementor-element-7b5bfab');
+    cy.get('.elementor-element-3c2f63f .elementor-button').click({ force: true });
+    cy.go("back");
+    this.assertSection("Our Trusted Partners", '.elementor-element-a38961e');
+    this.handleCarouselArrows('.e-eicon-chevron-left', '.e-eicon-chevron-right');
+    cy.scrollTo("bottom");
   }
 
   // ==========================
   // 🔹 Wrapper Methods
   // ==========================
-  runCubeFlow() { this.validateCubeSections(); }
+  runOmnichannelFlow() { this.validateOmnichannelSections(); }
   runIdentityGraphFlow() { this.validateIdentityGraphSections(); }
-  runEdgeFlow() { this.validateEdgeSections(); }
-  runVertexFlow() { this.validateVertexSections(); }
+  runAICohortFlow() { this.validateAICohortSections(); }
+  runAdServiceFlow() { this.validateAdServiceSections(); }
+  runForPublishersFlow() { this.validateForPublishersSections(); }
 }
 
-export default OurPlatformsPage;
+export default OurSolutionsPage;
