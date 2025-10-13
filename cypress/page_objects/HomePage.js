@@ -467,8 +467,13 @@ scrollToPageEnd() {
         cy.get('footer a[href="https://cubera.co/privacy-policy/"]').click({ force: true });
         break;
       case "terms":
-        cy.get('footer a[href="https://cubera.co/terms/"]').click({ force: true });
-        break;
+        cy.scrollTo("bottom", { duration: 1000 });                 // make sure footer visible
+        cy.get('footer a[href*="/terms"]', { timeout: 10000 })     // wildcard match, works with/without slash
+        .should("exist")                                         // don’t fail if hidden briefly
+        .scrollIntoView({ duration: 500 })
+        .click({ force: true });
+         break;
+
       case "disclaimer":
         cy.get('footer a[href="https://cubera.co/disclaimer/"]').click({ force: true });
         break;
@@ -493,7 +498,6 @@ scrollToPageEnd() {
     .click({ force: true });
 
   cy.wait(2000);
-  }
-
+}
 }
 export default HomePage;
