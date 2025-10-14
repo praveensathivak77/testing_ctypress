@@ -134,7 +134,7 @@ Feature: Cubera Homepage Navigation and Contact Form
       Then I should see the "Get in touch with us"
       And I click the Cubera logo to return home
 
-@only
+
   Scenario: Navigate footer quick links and validate pages
       Given I open the Cubera homepage
       When I scroll to the bottom of the page site
