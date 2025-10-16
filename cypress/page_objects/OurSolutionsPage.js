@@ -253,6 +253,8 @@ class OurSolutionsPage {
     )
       .should("be.visible")
       .click({ force: true });
+
+      
     this.navigateBack();
 
     cy.get(".elementor-element-a38961e").scrollIntoView({ duration: 1500 });

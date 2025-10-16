@@ -1,11 +1,14 @@
 {
   "name": "cubera_cypressfull",
   "version": "1.0.0",
-  "description": "",
+  "description": "Cypress BDD (Cucumber) E2E Automation with Mochawesome Reporting",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "test : focus" : "cypress run --env TAGS='@Learnmore"
+    "test": "npx cypress run",
+    "report:merge": "npx mochawesome-merge cypress/reports/*.json > cypress/reports/output.json",
+    "report:generate": "npx marge cypress/reports/output.json --reportDir cypress/reports/html --inline",
+    "test:report": "npm run test && npm run report:merge && npm run report:generate",
+    "test:report:open": "npm run test:report && start cypress/reports/html/index.html"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +20,9 @@
     "cypress-iframe": "^1.0.1",
     "cypress-mochawesome-reporter": "^4.0.2",
     "cypress-real-events": "^1.15.0",
-    "cypress-xpath": "^2.0.1"
+    "cypress-xpath": "^2.0.1",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.3.0"
   }
 }

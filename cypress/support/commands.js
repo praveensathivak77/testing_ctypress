@@ -24,3 +24,22 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import 'cypress-iframe';
+// =====================================
+// 🧩 Reusable function for external links
+// =====================================
+Cypress.Commands.add("clickExternalLink", (selector, expectedUrlPart) => {
+  cy.get(selector)
+    .should("be.visible")
+    .should("have.attr", "href")
+    .then((href) => {
+      cy.log(`🌐 Clicking external link: ${href}`);
+
+      // Remove target="_blank" so Cypress can open it in the same tab
+      cy.get(selector).invoke("removeAttr", "target").click();
+
+      // Validate that the URL includes expected domain/text
+      if (expectedUrlPart) {
+        cy.url({ timeout: 15000 }).should("include", expectedUrlPart);
+      }
+    });
+});

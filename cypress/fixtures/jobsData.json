@@ -1,0 +1,54 @@
+{
+  "jobs": [
+    {
+      "title": "UI Designer",
+      "locations": ["Bangalore"],
+      "date": "2025-10-16"
+    },
+    {
+      "title": "Behavioral Scientist",
+      "locations": ["Bangalore"],
+      "date": "2025-10-16"
+    },
+    {
+      "title": "Data Journalist",
+      "locations": ["Bangalore"],
+      "date": "2025-10-16"
+    },
+    {
+      "title": "Embedded Engineer",
+      "locations": ["Bangalore"],
+      "date": "2025-10-16"
+    },
+    {
+      "title": "Data Engineer – Junior",
+      "locations": ["Bangalore"],
+      "date": "2025-10-16"
+    },
+    {
+      "title": "Graphic Designer",
+      "locations": ["Bangalore"],
+      "date": "2025-10-16"
+    },
+    {
+      "title": "IT Recruiter",
+      "locations": ["Bangalore"],
+      "date": "2025-10-16"
+    },
+    {
+      "title": "Sales - Group Head",
+      "locations": ["Bangalore", "Delhi", "Mumbai", "USA"],
+      "date": "2025-10-16"
+    },
+    {
+      "title": "Operations Associate (Digital Marketing)",
+      "locations": ["Bangalore", "Delhi", "Mumbai", "USA"],
+      "date": "2025-10-16"
+    },
+    {
+      "title": "SecDevOps Engineer",
+      "locations": ["Bangalore"],
+      "date": "2025-10-16"
+    }
+  ]
+}
