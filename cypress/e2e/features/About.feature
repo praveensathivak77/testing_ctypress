@@ -10,7 +10,7 @@ Feature: About Page Validation
     And I verify the Partners and Ecosystem sections
     And I verify the Get in touch and final sections
 
-    @only
+
   Scenario: Verify Management team social links and career section
     Given I open the Cubera homepage
     When I hover over the About menu

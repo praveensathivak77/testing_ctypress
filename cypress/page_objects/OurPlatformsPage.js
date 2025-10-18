@@ -1,11 +1,26 @@
 class OurPlatformsPage {
-  // 🔹 Hover over "Our Platforms" menu
-  hoverOnOurPlatformsMenu() {
-    cy.contains("Our Platforms", { timeout: 10000 })
+    hoverOnOurPlatformsMenu() {
+    cy.log("🖱️ Hovering over 'Our Platforms' menu...");
+
+    // ✅ Use natural viewport (large desktop)
+    cy.viewport(1536, 864); // perfect for your Cubera layout
+
+    // ✅ Wait for the navigation bar to render
+    cy.get("header", { timeout: 20000 }).should("be.visible");
+
+    // ✅ Hover smoothly over "Our Platforms"
+    cy.contains("a", "Our Platforms", { timeout: 20000 })
       .should("exist")
-      .realHover("mouse");
-    cy.wait(1200);
+      .filter(":visible")
+      .scrollIntoView({ duration: 800 })
+      .should("be.visible")
+      .realHover({ position: "center" });
+
+    cy.wait(1500);
+
+    cy.log("✅ Successfully hovered over 'Our Platforms' menu.");
   }
+
 
   // 🔹 Verify submenu items are visible under "Our Platforms"
   verifySubmenuItems() {

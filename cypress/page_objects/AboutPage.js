@@ -7,6 +7,7 @@ class AboutPage {
     cy.visit("https://cubera.co/about-us/");
   }
 
+
   // ==========================
   // 🔹 Text Verifications
   // ==========================

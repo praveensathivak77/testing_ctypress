@@ -1,85 +1,81 @@
 // ***********************************************************
-// This example support/e2e.js is processed and
-// loaded automatically before your test files.
-//
-// This is a great place to put global configuration and
-// behavior that modifies Cypress.
-//
-// You can change the location of this file or turn off
-// automatically serving support files with the
-// 'supportFile' configuration option.
-//
-// You can read more here:
-// https://on.cypress.io/configuration
+// 🌐 Global Cypress Support Configuration (e2e.js)
 // ***********************************************************
 
-// Import commands.js using ES2015 syntax:
+// ✅ Import required plugins
 import "cypress-real-events";
+import "./commands";
+
 // ==============================================
-// 🧩 Cypress Global Support (e2e.js)
+// 🧩 Cypress Global Setup
 // ==============================================
 
-// ✅ Import custom commands
-import './commands';
-
-// ✅ Ignore uncaught exceptions from 3rd-party sites
+// ✅ Gracefully handle common harmless exceptions
 Cypress.on("uncaught:exception", (err, runnable) => {
-  // 🔸 Ignore known harmless errors from external scripts
   const ignoredMessages = [
     "ResizeObserver loop limit exceeded",
-    "Cannot read properties of null (reading 'postMessage')",
+    "Cannot read properties of null",
     "Cannot read properties of undefined",
     "Blocked a frame with origin",
     "Script error",
   ];
 
   if (ignoredMessages.some((msg) => err.message.includes(msg))) {
-    console.warn("⚠️ Ignored known harmless exception:", err.message);
-    return false; // Prevent Cypress from failing
-  }
-
-  // 🔸 Ignore errors from external domains (LinkedIn, GA, etc.)
-  const currentDomain = window.location.hostname;
-  if (
-    !currentDomain.includes("cubera.co") && // your domain
-    !currentDomain.includes("localhost")
-  ) {
-    console.warn("⚠️ Ignored external site exception from:", currentDomain);
+    console.warn("⚠️ Ignored harmless exception:", err.message);
     return false;
   }
 
-  // Let Cypress fail for real app errors
-  return true;
+  const currentDomain = window.location.hostname;
+  if (!currentDomain.includes("cubera.co") && !currentDomain.includes("localhost")) {
+    console.warn("⚠️ Ignored external site exception:", currentDomain);
+    return false;
+  }
+
+  return true; // let Cypress fail on real app errors
 });
 
-// ✅ Handle failures gracefully
+// ✅ Ignore blocked ad or analytics requests
 Cypress.on("fail", (error, runnable) => {
-  // If it's a known third-party network or analytics error, ignore it
   if (
     error.message.includes("net::ERR_BLOCKED_BY_CLIENT") ||
     error.message.includes("Script error")
   ) {
-    console.warn("⚠️ Ignored third-party network/analytics error:", error.message);
+    console.warn("⚠️ Ignored third-party network error:", error.message);
     return false;
   }
   throw error;
 });
 
-// ✅ Optional: Global configuration tweaks
+// ✅ Global default timeouts & desktop viewport
 Cypress.config({
-  defaultCommandTimeout: 15000, // wait longer for elements
-  pageLoadTimeout: 60000,       // allow slow pages to load
-  viewportWidth: 1366,
-  viewportHeight: 768,
+  defaultCommandTimeout: 15000,
+  pageLoadTimeout: 60000,
+  viewportWidth: 1536,  // 🖥️ Stable full-HD width for Cubera layout
+  viewportHeight: 864,
 });
 
-// ✅ Global before hook (runs before every test)
+// ==============================================
+// 🌍 Global Hooks
+// ==============================================
+
+// ✅ Runs before every test
 beforeEach(() => {
   cy.log("🌐 Starting test...");
+
+  // 🖥️ Force stable desktop viewport every time
+  cy.viewport(1536, 864);
+
+  // 🧩 Optional fix: Adjust zoom when running in Cypress preview (only)
+  cy.document().then((doc) => {
+    if (Cypress.config("isInteractive")) {
+      // ↓ Reduce zoom slightly to fix overlapping layout in Cypress GUI mode
+      doc.body.style.zoom = "90%";
+      cy.log("🔧 Adjusted zoom to 90% for better layout rendering in runner.");
+    }
+  });
 });
 
-// ✅ Global after hook (runs after every test)
+// ✅ Runs after every test
 afterEach(() => {
   cy.log("✅ Test completed.");
 });
-
